@@ -134,6 +134,59 @@ nav ul {
   color: #2d6a4f;
 }
 
+.harvest {
+  padding: 80px 0;
+  background: #f0f5f0;
+}
+
+.harvest h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #2d6a4f;
+}
+
+.week-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.week-card h3 {
+  color: #2d6a4f;
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0f0e0;
+}
+
+.day-row {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: baseline;
+}
+
+.day-row:last-child {
+  border-bottom: none;
+}
+
+.day-label {
+  font-weight: 700;
+  color: #40916c;
+  min-width: 60px;
+  font-size: 0.9rem;
+}
+
+.day-items {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 .guides {
   padding: 80px 0;
   background: #fff;

@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn the story of Greens N Berries — from a small NParks plot at Bukit Gombak to a half-acre urban farm in Johor Bahru, growing 30+ pesticide-free crops.">
+  <meta name="keywords" content="urban farm, Johor Bahru, pesticide-free, Bukit Gombak, sustainable farming, Malaysia">
+  <meta property="og:title" content="Our Story — Greens N Berries">
+  <meta property="og:description" content="From a small NParks plot at Bukit Gombak to a thriving urban farm in Johor Bahru. Discover our journey.">
+  <meta property="og:image" content="https://www.greensnberries.com/images/farm-scene.jpg">
+  <meta property="og:type" content="website">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDJXZHYP47"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,7 +20,7 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     .guide-hero {
-      background: linear-gradient(135deg, #1b4332, #2d6a4f, #40916c);
+      background: linear-gradient(135deg, rgba(27,67,50,0.85), rgba(45,106,79,0.85), rgba(64,145,108,0.85)), url('images/farm-scene.jpg') center / cover;
       color: #fff;
       padding: 160px 0 80px;
       text-align: center;
@@ -153,6 +159,26 @@
     .timeline-item p {
       margin-bottom: 4px;
     }
+
+    .about-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .about-gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+
+    .about-gallery img:hover {
+      transform: scale(1.02);
+    }
   </style>
 </head>
 <body>
@@ -225,6 +251,26 @@
           <div class="date">Today &amp; Beyond</div>
           <p>Growing 30+ crops, building soil health, sharing harvests, and proving that urban farming can feed a community sustainably.</p>
         </div>
+      </div>
+
+      <h3>Farm Gallery — Before Greens N Berries</h3>
+      <p>Photos from the early days at Bukit Gombak before the move to Johor Bahru.</p>
+      <div class="about-gallery">
+        <img src="images/farm-scene.jpg" alt="Greens N Berries farm" loading="lazy">
+        <img src="images/farm-garden.jpg" alt="Greens N Berries garden" loading="lazy">
+        <img src="images/farm-planting.jpg" alt="Planting at Greens N Berries" loading="lazy">
+        <img src="images/farm-early-days.jpg" alt="Early days at Greens N Berries" loading="lazy">
+      </div>
+
+      <h3>Greens N Berries Gallery</h3>
+      <p>Fresh produce grown at our JoyAcre farm in Johor Bahru — pesticide-free, picked at peak ripeness.</p>
+      <div class="about-gallery">
+        <img src="images/mustard-green.jpg" alt="Mustard greens at Greens N Berries" loading="lazy">
+        <img src="images/pearl-eggplant.jpg" alt="Pearl eggplant at Greens N Berries" loading="lazy">
+        <img src="images/long-bean-bitter-gourd-winged-bean.jpg" alt="Long bean, bitter gourd, and winged bean" loading="lazy">
+        <img src="images/cucumber.jpg" alt="Cucumber at Greens N Berries" loading="lazy">
+        <img src="images/chilli-api.jpg" alt="Chilli api at Greens N Berries" loading="lazy">
+        <img src="images/barbados-cherry.jpg" alt="Barbados cherry at Greens N Berries" loading="lazy">
       </div>
 
       <h3>Come Visit</h3>

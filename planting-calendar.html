@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDJXZHYP47"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NDJXZHYP47');
+  </script>
+  <title>Planting Calendar — Greens N Berries</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .guide-hero {
+      background: linear-gradient(135deg, #2d6a4f, #40916c, #52b788);
+      color: #fff;
+      padding: 160px 0 80px;
+      text-align: center;
+    }
+
+    .guide-hero h2 {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+
+    .guide-hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+
+    .guide-content {
+      padding: 60px 0;
+    }
+
+    .guide-content .container {
+      max-width: 900px;
+    }
+
+    .guide-content h3 {
+      font-size: 1.5rem;
+      color: #2d6a4f;
+      margin: 40px 0 16px;
+    }
+
+    .guide-content p {
+      margin-bottom: 16px;
+      color: #444;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 10px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 24px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #fff;
+      color: #2d6a4f;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: #2d6a4f;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 40px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .month-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .month-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-top: 4px solid #52b788;
+    }
+
+    .month-card h4 {
+      color: #2d6a4f;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e0f0e0;
+    }
+
+    .month-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .month-card li {
+      padding: 4px 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .month-card li::before {
+      content: "• ";
+      color: #52b788;
+      font-weight: 700;
+    }
+
+    .seedling {
+      color: #e8923a !important;
+    }
+
+    .seedling::before {
+      content: "🧑‍🌾 " !important;
+      color: inherit !important;
+    }
+
+    .legend {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .view-toggle {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .view-toggle button {
+      background: none;
+      border: 2px solid #2d6a4f;
+      color: #2d6a4f;
+      padding: 8px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .view-toggle button.active {
+      background: #2d6a4f;
+      color: #fff;
+    }
+
+    .view-toggle button:first-child {
+      border-radius: 8px 0 0 8px;
+    }
+
+    .view-toggle button:last-child {
+      border-radius: 0 8px 8px 0;
+      border-left: none;
+    }
+
+    /* Calendar View */
+    .cal-view .month-grid {
+      display: none;
+    }
+
+    .cal-view .cal-month {
+      display: block;
+    }
+
+    .cal-month {
+      display: none;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .cal-month h4 {
+      color: #2d6a4f;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      text-align: center;
+    }
+
+    .cal-grid .day-header {
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #2d6a4f;
+      padding: 6px 0;
+    }
+
+    .cal-grid .day-cell {
+      min-height: 70px;
+      padding: 4px;
+      font-size: 0.75rem;
+      color: #555;
+      border-radius: 6px;
+      background: #f9f9f9;
+      position: relative;
+    }
+
+    .cal-grid .day-cell .day-num {
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #888;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .cal-grid .day-cell .event {
+      background: #d8f3dc;
+      border-radius: 4px;
+      padding: 1px 3px;
+      margin: 1px 0;
+      font-size: 0.65rem;
+      color: #2d6a4f;
+      line-height: 1.3;
+    }
+
+    .cal-grid .day-cell .event.seedling {
+      background: #fce4c8;
+      color: #c76b1e;
+    }
+
+    .cal-grid .day-cell.empty {
+      background: none;
+    }
+
+    .card-view .cal-month {
+      display: none;
+    }
+
+    .cal-view h3 {
+      display: none;
+    }
+
+    .card-view .month-grid {
+      display: grid;
+    }
+
+    @media (max-width: 600px) {
+      .guide-hero h2 { font-size: 2rem; }
+      .cal-grid .day-cell { min-height: 50px; font-size: 0.65rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1 class="logo"><img src="images/logo.svg" alt="" style="height:36px;vertical-align:middle;margin-right:6px"> Greens N Berries</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#guides">Guides</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="guide-hero">
+    <div class="container">
+      <h2>📅 Planting Calendar</h2>
+      <p>Every crop planted at Greens N Berries, organised by month.</p>
+      <a href="index.html" class="btn-outline">&larr; Back to Home</a>
+    </div>
+  </section>
+
+  <section class="guide-content">
+    <div class="container">
+      <div class="legend">
+        <span>🌱 Direct sow / transplant</span>
+        <span>🧑‍🌾 From seedlings</span>
+      </div>
+
+      <div class="view-toggle">
+        <button id="btnCard" class="active" onclick="switchView('card')">📋 Card View</button>
+        <button id="btnCal" onclick="switchView('calendar')">📅 Calendar View</button>
+      </div>
+
+      <div id="planting-data" class="card-view">
+
+      <h3>December 2025</h3>
+      <div class="month-grid">
+        <div class="month-card"><h4>🍠 Yam</h4><ul><li>25 Dec — Seedling planted</li></ul></div>
+        <div class="month-card"><h4>🌿 Okra</h4><ul><li class="seedling">25 Dec — Seedlings started</li></ul></div>
+        <div class="month-card"><h4>🫘 Long Bean</h4><ul><li class="seedling">25 Dec — Seedlings started</li></ul></div>
+      </div>
+
+      <h3>January 2026</h3>
+      <div class="month-grid">
+        <div class="month-card"><h4>🍠 Sweet Potato</h4><ul><li>1 Feb — Planted</li></ul></div>
+      </div>
+
+      <h3>February 2026</h3>
+      <div class="month-grid">
+        <div class="month-card"><h4>🥬 Sengkuang</h4><ul><li>4 Feb — From seed</li></ul></div>
+        <div class="month-card"><h4>🥬 Spinach</h4><ul><li>15 Feb — Planted</li></ul></div>
+        <div class="month-card"><h4>🍠 Yam</h4><ul><li>18 Feb — Planted</li></ul></div>
+        <div class="month-card"><h4>🍠 Sweet Potato</h4><ul><li>1 Feb — Planted</li><li>21 Feb — Planted</li><li>28 Feb — Planted</li></ul></div>
+      </div>
+
+      <h3>March 2026</h3>
+      <div class="month-grid">
+        <div class="month-card"><h4>🌿 Winged Bean</h4><ul><li>1 Mar — From seed</li><li>14 Mar — From seed</li><li>21 Mar — From seed</li></ul></div>
+        <div class="month-card"><h4>🥒 Cucumber</h4><ul><li>8 Mar — From seed</li></ul></div>
+        <div class="month-card"><h4>🍆 Eggplant</h4><ul><li class="seedling">8 Mar — Seedlings</li></ul></div>
+        <div class="month-card"><h4>🍅 Tomato</h4><ul><li class="seedling">8 Mar — Seedlings</li></ul></div>
+        <div class="month-card"><h4>🌿 Okra</h4><ul><li>8 Mar — From seed</li><li>21 Mar — Planted</li></ul></div>
+        <div class="month-card"><h4>🍈 Mini Melon</h4><ul><li>21 Mar — From seed</li></ul></div>
+        <div class="month-card"><h4>🫘 Long Bean</h4><ul><li>21 Mar — Planted</li></ul></div>
+      </div>
+
+      <h3>April 2026</h3>
+      <div class="month-grid">
+        <div class="month-card"><h4>🌽 Corn</h4><ul><li>4 Apr — Planted</li><li>12 Apr — White corn</li><li>25 Apr — Yellow corn</li></ul></div>
+        <div class="month-card"><h4>🫘 Long Bean</h4><ul><li>4 Apr — Planted</li><li>26 Apr — Planted</li></ul></div>
+        <div class="month-card"><h4>🥒 Luffa</h4><ul><li>11 Apr — From seed</li></ul></div>
+        <div class="month-card"><h4>🍈 Thai Honey Dew</h4><ul><li>11 Apr — From seed</li></ul></div>
+        <div class="month-card"><h4>🍠 Sweet Potato</h4><ul><li>19 Apr — Planted</li></ul></div>
+      </div>
+
+      <h3>May 2026</h3>
+      <div class="month-grid">
+        <div class="month-card"><h4>🫚 Ginger</h4><ul><li>1 May — Planted</li></ul></div>
+        <div class="month-card"><h4>🫘 Long Bean</h4><ul><li>2 May — Planted</li></ul></div>
+        <div class="month-card"><h4>🌽 Baby Corn</h4><ul><li>10 May — Planted</li></ul></div>
+        <div class="month-card"><h4>🥬 Kang Kung</h4><ul><li>16 May — Planted</li></ul></div>
+        <div class="month-card"><h4>🍅 Tomato</h4><ul><li>23 May — Planted</li></ul></div>
+        <div class="month-card"><h4>🟣 Purple Winged Bean</h4><ul><li>23 May — Planted</li></ul></div>
+        <div class="month-card"><h4>🌿 Okra</h4><ul><li>24 May — Planted</li></ul></div>
+        <div class="month-card"><h4>🎃 Pumpkin</h4><ul><li>30 May — Planted</li></ul></div>
+        <div class="month-card"><h4>🥬 Malabar Spinach</h4><ul><li>30 May — Planted</li></ul></div>
+      </div>
+
+      <h3>June 2026</h3>
+      <div class="month-grid">
+        <div class="month-card"><h4>🫘 Long Bean</h4><ul><li>1 Jun — Planted</li></ul></div>
+        <div class="month-card"><h4>🥬 Kang Kung</h4><ul><li>1 Jun — Planted</li></ul></div>
+        <div class="month-card"><h4>🥬 Mustard Hakka</h4><ul><li>1 Jun — Planted</li></ul></div>
+        <div class="month-card"><h4>🌿 Red Stem Asam Leaves</h4><ul><li>1 Jun — Planted</li></ul></div>
+      </div>
+
+      <h3>Ongoing</h3>
+      <div class="month-grid">
+        <div class="month-card"><h4>🍍 Nenas (Pineapple)</h4><ul><li>Jun–Aug 2025 — Planted</li></ul></div>
+      </div>
+
+      <a href="index.html" class="back-link">&larr; Back to all guides</a>
+
+      <div id="cal-views"><!-- calendar grids rendered by JS --></div>
+
+    </div><!-- /planting-data -->
+
+    </div><!-- /container -->
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Greens N Berries. Pesticide-Free Produce.</p>
+    </div>
+  </footer>
+  <script>
+    function switchView(mode) {
+      var container = document.getElementById('planting-data');
+      var btnCard = document.getElementById('btnCard');
+      var btnCal = document.getElementById('btnCal');
+
+      if (mode === 'calendar') {
+        container.classList.remove('card-view');
+        container.classList.add('cal-view');
+        btnCard.classList.remove('active');
+        btnCal.classList.add('active');
+        renderCalendars();
+      } else {
+        container.classList.remove('cal-view');
+        container.classList.add('card-view');
+        btnCal.classList.remove('active');
+        btnCard.classList.add('active');
+      }
+    }
+
+    var rendered = false;
+
+    function renderCalendars() {
+      if (rendered) return;
+      rendered = true;
+
+      var months = document.querySelectorAll('#planting-data > h3');
+      var calViews = document.getElementById('cal-views');
+      calViews.innerHTML = '';
+
+      months.forEach(function(header) {
+        var monthGrid = header.nextElementSibling;
+        if (!monthGrid || !monthGrid.classList.contains('month-grid')) return;
+
+        var monthName = header.textContent.trim();
+        var cards = monthGrid.querySelectorAll('.month-card');
+
+        // Collect events for this month { day, label, isSeedling }
+        var events = [];
+        cards.forEach(function(card) {
+          var crop = card.querySelector('h4').textContent.trim();
+          var items = card.querySelectorAll('li, .seedling');
+          items.forEach(function(li) {
+            var match = li.textContent.match(/(\d+)\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/);
+            if (match) {
+              var day = parseInt(match[1], 10);
+              var monthAbbr = match[2];
+              var details = li.textContent.trim();
+              var isSeedling = li.classList.contains('seedling');
+              events.push({ day: day, monthAbbr: monthAbbr, label: crop + ' — ' + details.replace(/^\d+\s+\w+\s+—\s*/, '').replace(/^\d+\s+\w+\s+/, ''), isSeedling: isSeedling });
+            } else if (li.textContent.match(/Jun–Aug/)) {
+              // Ongoing entry, skip day placement
+            }
+          });
+        });
+
+        if (events.length === 0) return;
+
+        var monthAbbr = events[0].monthAbbr;
+        var monthNames = { Jan:'January',Feb:'February',Mar:'March',Apr:'April',May:'May',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Oct:'October',Nov:'November',Dec:'December' };
+        var monthIndex = { Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11 };
+        var yearMatch = monthName.match(/(\d{4})/);
+        var year = yearMatch ? parseInt(yearMatch[1], 10) : 2026;
+        var mi = monthIndex[monthAbbr];
+        var firstDay = new Date(year, mi, 1).getDay(); // 0=Sun
+        var daysInMonth = new Date(year, mi + 1, 0).getDate();
+
+        // Get events per day
+        var dayEvents = {};
+        events.forEach(function(e) {
+          if (!dayEvents[e.day]) dayEvents[e.day] = [];
+          dayEvents[e.day].push(e);
+        });
+
+        var dayHeaders = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        var html = '<div class="cal-month"><h4>' + monthNames[monthAbbr] + ' ' + year + '</h4><div class="cal-grid">';
+        dayHeaders.forEach(function(d) { html += '<div class="day-header">' + d + '</div>'; });
+        for (var i = 0; i < firstDay; i++) { html += '<div class="day-cell empty"></div>'; }
+        for (var d = 1; d <= daysInMonth; d++) {
+          html += '<div class="day-cell">';
+          html += '<span class="day-num">' + d + '</span>';
+          if (dayEvents[d]) {
+            dayEvents[d].forEach(function(e) {
+              html += '<div class="event' + (e.isSeedling ? ' seedling' : '') + '">' + e.label + '</div>';
+            });
+          }
+          html += '</div>';
+        }
+        html += '</div></div>';
+        calViews.innerHTML += html;
+      });
+    }
+  </script>
+</body>
+</html>
